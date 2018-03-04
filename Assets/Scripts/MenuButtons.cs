@@ -16,4 +16,9 @@ public class MenuButtons : MonoBehaviour {
 	//void Update () {
 		
 	//}
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
