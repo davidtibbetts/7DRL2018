@@ -5,6 +5,7 @@
         <file id="1" name="drip_body.png" width="16" height="16" pivot_x="0.5" pivot_y="1"/>
         <file id="2" name="drip_eye.png" width="16" height="16" pivot_x="0.5" pivot_y="0.5"/>
         <file id="3" name="drip_head.png" width="16" height="16" pivot_x="0.5" pivot_y="1"/>
+        <file id="4" name="cow-running.gif" width="364" height="286" pivot_x="0" pivot_y="1"/>
     </folder>
     <entity id="0" name="drip">
         <animation id="0" name="Idle" length="500" interval="100">
@@ -86,6 +87,13 @@
                     <object folder="0" file="2" x="7" y="-25" angle="60.640275"/>
                 </key>
             </timeline>
+        </animation>
+    </entity>
+    <entity id="1" name="cow">
+        <animation id="0" name="Idle" length="1000" interval="100">
+            <mainline>
+                <key id="0"/>
+            </mainline>
         </animation>
     </entity>
 </spriter_data>

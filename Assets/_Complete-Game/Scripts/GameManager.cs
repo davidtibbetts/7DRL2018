@@ -19,7 +19,7 @@ namespace Completed
 		private Text levelText;									//Text to display current level number.
 		private GameObject levelImage;							//Image to block out level as levels are being set up, background for levelText.
 		private BoardManager boardScript;						//Store a reference to our BoardManager which will set up the level.
-		private int level = 1;									//Current level number, expressed in game as "Day 1".
+		private int level = 1;									//Current level number, expressed in game as "Floor 1".
 		private List<Enemy> enemies;							//List of all Enemy units, used to issue them move commands.
 		private bool enemiesMoving;								//Boolean to check if enemies are moving.
 		private bool doingSetup = true;							//Boolean to check if we're setting up board, prevent Player from moving during setup.
@@ -30,17 +30,16 @@ namespace Completed
 		void Awake()
 		{
             //Check if instance already exists
-            if (instance == null)
-
+            if(instance == null) {
                 //if not, set instance to this
                 instance = this;
-
+            }
             //If instance already exists and it's not this:
-            else if (instance != this)
-
+            else if(instance != this) {
                 //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-                Destroy(gameObject);	
-			
+                Destroy(gameObject);
+            }
+
 			//Sets this to not be destroyed when reloading scene
 			DontDestroyOnLoad(gameObject);
 			
@@ -50,8 +49,9 @@ namespace Completed
 			//Get a component reference to the attached BoardManager script
 			boardScript = GetComponent<BoardManager>();
 			
-			//Call the InitGame function to initialize the first level 
-			InitGame();
+            // DMT - Don't load on Awake. Play Button in Menu will do first Init()
+			////Call the InitGame function to initialize the first level 
+			//InitGame();
 		}
 
         //this is called only once, and the paramter tell it to be called only after the scene was loaded
@@ -72,7 +72,7 @@ namespace Completed
 
 		
 		//Initializes the game for each level.
-		void InitGame()
+		public void InitGame()
 		{
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
@@ -83,8 +83,8 @@ namespace Completed
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
 			
-			//Set the text of levelText to the string "Day" and append the current level number.
-			levelText.text = "Day " + level;
+			//Set the text of levelText to the string "Floor" and append the current level number.
+			levelText.text = "Floor " + level;
 			
 			//Set levelImage to active blocking player's view of the game board during setup.
 			levelImage.SetActive(true);
@@ -136,7 +136,7 @@ namespace Completed
 		public void GameOver()
 		{
 			//Set levelText to display number of levels passed and game over message
-			levelText.text = "After " + level + " days, you starved.";
+			levelText.text = "After " + level + " floors, you died.";
 			
 			//Enable black background image gameObject.
 			levelImage.SetActive(true);
